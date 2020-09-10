@@ -205,7 +205,7 @@ function replacementForNode (node) {
   if (whitespace.leading || whitespace.trailing) content = content.trim()
   return (
     whitespace.leading +
-    rule.replacement(content.replace(">", "\\>"), node, this.options) +
+    rule.replacement(content.replace(">", "\>"), node, this.options) +
     whitespace.trailing
   )
 }
