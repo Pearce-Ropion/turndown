@@ -904,7 +904,7 @@ var TurndownService = (function () {
 
     // https://regex101.com/r/MzY5IE/3
     var doNotMatchOn = ["[\\W]", ...this.options.validElements.map(elem => elem.toLowerCase())].join("|");
-    var contentRegex = new RegExp(`(<(?!(${doNotMatchOn})).*)((?<![\/\\>])>)`, "gim");
+    var contentRegex = new RegExp(`(<(?!(${doNotMatchOn})).*?)((?<![\/\\>])>)`, "gim");
 
     return (
       whitespace.leading +
