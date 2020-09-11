@@ -902,7 +902,7 @@ var TurndownService = (function () {
     if (whitespace.leading || whitespace.trailing) content = content.trim();
 
     // https://regex101.com/r/MzY5IE/2
-    var contentRegex = new RegExp(/(<(?![\W])\S*)((?<![\/\\>])>)/, "gim");
+    var contentRegex = new RegExp(/(<(?![\W]).*)((?<![\/\\>])>)/, "gim");
 
     return (
       whitespace.leading +
