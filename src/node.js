@@ -2,7 +2,10 @@ import { isBlock, isVoid, hasVoid, isMeaningfulWhenBlank, hasMeaningfulWhenBlank
 
 export default function Node (node) {
   node.isBlock = isBlock(node)
-  node.isCode = node.nodeName.toLowerCase() === 'code' || node.nodeName.toLowerCase() === "pre" || node.parentNode.isCode
+  node.isCode =
+    node.nodeName.toLowerCase() === 'code' ||
+    node.nodeName.toLowerCase() === "pre" ||
+    node.parentNode.isCode
   node.isBlank = isBlank(node)
   node.flankingWhitespace = flankingWhitespace(node)
   return node

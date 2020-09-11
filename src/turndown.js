@@ -3,6 +3,7 @@ import Rules from './rules'
 import { extend } from './utilities'
 import RootNode from './root-node'
 import Node from './node'
+
 var reduce = Array.prototype.reduce
 var leadingNewLinesRegExp = /^\n*/
 var trailingNewLinesRegExp = /\n*$/
@@ -203,9 +204,13 @@ function replacementForNode (node) {
   var content = process.call(this, node)
   var whitespace = node.flankingWhitespace
   if (whitespace.leading || whitespace.trailing) content = content.trim()
+
+  // https://regex101.com/r/MzY5IE/2
+  var contentRegex = new RegExp(/(<(?![<>\W\s])[\w*]*)((?<![\/>])>)/, "gim");
+
   return (
     whitespace.leading +
-    rule.replacement(content.replace(">", "\>"), node, this.options) +
+    rule.replacement(content.replace(contentRegex, "$1\\>"), node, this.options) +
     whitespace.trailing
   )
 }
