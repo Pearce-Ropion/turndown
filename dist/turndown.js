@@ -733,6 +733,7 @@ var TurndownService = (function () {
       strongDelimiter: '**',
       linkStyle: 'inlined',
       linkReferenceStyle: 'full',
+      validElements: [],
       br: '  ',
       blankReplacement: function (content, node) {
         return node.isBlock ? '\n\n' : ''
@@ -902,7 +903,8 @@ var TurndownService = (function () {
     if (whitespace.leading || whitespace.trailing) content = content.trim();
 
     // https://regex101.com/r/MzY5IE/2
-    var contentRegex = new RegExp(/(<(?![\W]).*)((?<![\/\\>])>)/, "gim");
+    var doNotMatchOn = ["[\W]", ...this.options.validElements.map(elem => elem.toLowerCase())].join("|");
+    var contentRegex = new RegExp(`(<(?!(${doNotMatchOn})).*)((?<![\/\\>])>)`, "gim");
 
     return (
       whitespace.leading +
