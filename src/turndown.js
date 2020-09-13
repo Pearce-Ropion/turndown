@@ -207,12 +207,17 @@ function replacementForNode (node) {
   if (whitespace.leading || whitespace.trailing) content = content.trim()
 
   // https://regex101.com/r/MzY5IE/3
-  var doNotMatchOn = ["[\\W]", ...this.options.validElements.map(elem => elem.toLowerCase())].join("|");
-  var contentRegex = new RegExp(`(<(?!(${doNotMatchOn})).*?)((?<![\/\\>])>)`, "gim");
+  var doNotMatchOn = ['[\\W]', ...this.options.validElements.map(elem => elem.toLowerCase())].join('|')
+  var contentRegex = new RegExp(`(<(?!(${doNotMatchOn})).*?)((?<![\/\\>])>)`, 'gim')
+  
+  var _content = content
+  if (!node.isCode) {
+      _content = content.replace(contentRegex, '$1\\>')
+  }
 
   return (
     whitespace.leading +
-    rule.replacement(content.replace(contentRegex, "$1\\>"), node, this.options) +
+    rule.replacement(_content, node, this.options) +
     whitespace.trailing
   )
 }

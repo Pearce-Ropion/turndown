@@ -30,11 +30,11 @@ function flankingWhitespace (node) {
     var hasTrailing = /\s$/.test(node.textContent)
     var blankWithSpaces = node.isBlank && hasLeading && hasTrailing
 
-    if (hasLeading && !isFlankedByWhitespace('left', node)) {
+    if (hasLeading && !isFlankedByWhitespace('left', node)  && !node.isCode) {
       leading = ' '
     }
 
-    if (!blankWithSpaces && hasTrailing && !isFlankedByWhitespace('right', node)) {
+    if (!blankWithSpaces && hasTrailing && !isFlankedByWhitespace('right', node) && !node.isCode) {
       trailing = ' '
     }
   }
