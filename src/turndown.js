@@ -208,9 +208,9 @@ function replacementForNode (node) {
 
   var _content = content
   if (!node.isCode) {
-      // https://regex101.com/r/MzY5IE/7
-      var doNotMatchOn = ['[\\W]', ...this.options.validElements.map(elem => elem.toLowerCase())].join('|')
-      var contentRegex = new RegExp(`(<(?!(${doNotMatchOn})).*?)((?<![\/\\>])>)`, 'gim')
+      // https://regex101.com/r/MzY5IE/8
+      var doNotMatchOn = ['[^\w>]', ...this.options.validElements.map(elem => elem.toLowerCase())].join('|')
+      var contentRegex = new RegExp(`(<(?!(${doNotMatchOn})).*?)((?<![\/\\])>)`, 'gim')
       _content = content.replace(contentRegex, '$1\\>')
   }
 
