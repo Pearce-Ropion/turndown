@@ -210,7 +210,7 @@ function replacementForNode (node) {
   if (!node.isCode) {
       // https://regex101.com/r/MzY5IE/8
       var doNotMatchOn = ['[^\\w>]', ...this.options.validElements.map(elem => elem.toLowerCase())].join('|')
-      var contentRegex = new RegExp(`(<(?!(${doNotMatchOn})).*?)((?<![\\/\\\])>)`, 'gim')
+      var contentRegex = new RegExp(`(<(?!(${doNotMatchOn})).*?)((?<![\\/\\\\])>)`, 'gim')
       _content = content.replace(contentRegex, '$1\\>')
   }
 
